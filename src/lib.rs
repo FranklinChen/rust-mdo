@@ -135,17 +135,20 @@ pub mod iter {
     use std::iter::FlatMap;
 
     /// bind for Iterator<T, E>, equivalent to `m.flat_map(f)`
+    #[inline(always)]
     pub fn bind<I, U, F>(m: I, f: F) -> FlatMap<I, U, F>
     where I: Iterator, U: Iterator, F: FnMut(<I as Iterator>::Item) -> U {
         m.flat_map(f)
     }
 
     /// return for Iterator<T>, an iterator with one value.
+    #[inline(always)]
     pub fn ret<T>(x: T) -> option::IntoIter<T> {
         Some(x).into_iter()
     }
 
     /// mzero for Iterator<T>, an empty iterator.
+    #[inline(always)]
     pub fn mzero<T>() -> option::IntoIter<T> {
         None.into_iter()
     }
